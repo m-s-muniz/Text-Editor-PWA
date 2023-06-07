@@ -3,8 +3,8 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
+// Added and configured workbox plugins for a service worker and manifest file.
+// Added CSS loaders and babel to webpack.
 
 module.exports = () => {
   return {
@@ -35,13 +35,13 @@ module.exports = () => {
         name: 'Just Another Test Editor',
         short_name: 'JATE',
         description: 'Just Another Test Editor',
-        background_color: "#ff00ff",
-        theme_color: "ff00ff",
+        background_color: "#3d75b8",
+        theme_color: "#3d75b8",
         start_url: "./",
         publicPath: "./",
         icons: [
           {
-            src: path.resolve('src/images/logo'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
@@ -57,6 +57,13 @@ module.exports = () => {
           use: ['style-loader', 'css-loader'],
         },
         {
+          test: /.(png|svg|jpg|jpeg|gif)$/i,
+          type: 'asset/resource',
+          generator: {
+              filename: 'assets/[hash][ext][query]'
+          }
+      },
+        {
           test: /\.m?js$/,
           exclude: /node_modules/,
           // We use babel-loader in order to use ES6.
@@ -64,7 +71,7 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+              // plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
          },
         },
        }, 
