@@ -33,13 +33,14 @@ module.exports = () => {
       // Creates a manifest.json file
       new WebpackPwaManifest({
         fingerprints: false,
+        inject: true,
         name: 'Just Another Test Editor',
         short_name: 'JATE',
         description: 'Just Another Test Editor',
         background_color: "#3d75b8",
         theme_color: "#3d75b8",
-        start_url: "./",
-        publicPath: "./",
+        start_url: "/",
+        publicPath: "/",
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
@@ -57,13 +58,6 @@ module.exports = () => {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
         },
-      //   {
-      //     test: /.(png|svg|jpg|jpeg|gif)$/i,
-      //     type: 'asset/resource',
-      //     generator: {
-      //         filename: 'assets/[hash][ext][query]'
-      //     }
-      // },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
